@@ -34,7 +34,7 @@ cd jpeg* || exit /b
 copy /Y jconfig.vc jconfig.h || exit /b
 nmake /E -f jpeg.mak || exit /b
 copy /Y Release\jpeg.lib ..\build\lib\ || exit /b
-powershell -Command "& { cat jmorecfg.h | %{$_ -replace \"typedef long INT32;\", \"\"} | Set-Content -Path jmorecfg.h.patched }" || exit /b
+powershell -Command "& { cat jmorecfg.h | \%{$_ -replace \"typedef long INT32;\", \"\"} | Set-Content -Path jmorecfg.h.patched }" || exit /b
 move /Y jmorecfg.h.patched jmorecfg.h || exit /b
 copy /Y *.h ..\build\include\ || exit /b
 cd .. || exit /b
@@ -53,7 +53,7 @@ cd .. || exit /b
 
 REM http://downloads.sourceforge.net/project/libmng/libmng-devel/1.0.10/libmng-1.0.10.tar.gz?use_mirror=freefr || exit /b
 cd libmng* || exit /b
-powershell -Command "& { cat makefiles/makefile.vcwin32 | %{$_ -replace \"0\", \"O\"} | Set-Content -Path makefiles/makefile.vcwin32.patched }" || exit /b
+powershell -Command "& { cat makefiles/makefile.vcwin32 | \%{$_ -replace \"0\", \"O\"} | Set-Content -Path makefiles/makefile.vcwin32.patched }" || exit /b
 move /Y makefiles\makefile.vcwin32.patched makefiles\makefile.vcwin32 || exit /b
 nmake /E -f makefiles/makefile.vcwin32 || exit /b
 copy /Y libmng.lib ..\build\lib\mng.lib || exit /b
@@ -96,7 +96,7 @@ REM cd .. || exit /b
 
 REM http://www.lua.org/ftp/lua-5.1.5.tar.gz || exit /b
 cd lua-5.1.5 || exit /b
-powershell -Command "& { cat etc/luavs.bat | %{$_ -replace \"cl\", \"cl /D_USING_V140_SDK71_\"} | Set-Content -Path etc/luavs-patched.bat }" || exit /b
+powershell -Command "& { cat etc/luavs.bat | \%{$_ -replace \"cl\", \"cl /D_USING_V140_SDK71_\"} | Set-Content -Path etc/luavs-patched.bat }" || exit /b
 etc\luavs-patched.bat || exit /b
 copy /Y src\lua51.lib ..\build\lib\lua.lib || exit /b
 copy /Y src\*.h ..\build\include\ || exit /b
@@ -105,7 +105,7 @@ cd .. || exit /b
 REM https://github.com/LuaDist/toluapp/archive/master.zip || exit /b
 cd toluapp* || exit /b
 mkdir build || exit /b
-powershell -Command "& { cat CMakeLists.txt | %{$_ -replace [Regex]::Escape(\"add_library ( toluapp_lib \"), \"add_library ( toluapp_lib STATIC \"} | Set-Content -Path CMakeLists.txt.patched }" || exit /b
+powershell -Command "& { cat CMakeLists.txt | \%{$_ -replace [Regex]::Escape(\"add_library ( toluapp_lib \"), \"add_library ( toluapp_lib STATIC \"} | Set-Content -Path CMakeLists.txt.patched }" || exit /b
 move /Y CMakeLists.txt.patched CMakeLists.txt || exit /b
 cd build || exit /b
 cmake -G "Visual Studio 14 2015" -T v140_xp -DCMAKE_PREFIX_PATH=..\build .. || exit /b
@@ -130,15 +130,15 @@ cd .. || exit /b
 REM https://www.libsdl.org/release/SDL-1.2.15.tar.gz || exit /b
 cd SDL* || exit /b
 devenv VisualC\SDL.sln /upgrade || exit /b
-powershell -Command "& { cat VisualC\SDL\SDL.vcxproj | %{$_ -replace \"dxguid.lib;\", \"\"} | Set-Content -Path VisualC\SDL\SDL.vcxproj.patched }" || exit /b
+powershell -Command "& { cat VisualC\SDL\SDL.vcxproj | \%{$_ -replace \"dxguid.lib;\", \"\"} | Set-Content -Path VisualC\SDL\SDL.vcxproj.patched }" || exit /b
 move /Y VisualC\SDL\SDL.vcxproj.patched VisualC\SDL\SDL.vcxproj || exit /b
-powershell -Command "& { cat VisualC\SDL\SDL.vcproj | %{$_ -replace \"dxguid.lib\", \"\"} | Set-Content -Path VisualC\SDL\SDL.vcproj.patched }" || exit /b
+powershell -Command "& { cat VisualC\SDL\SDL.vcproj | \%{$_ -replace \"dxguid.lib\", \"\"} | Set-Content -Path VisualC\SDL\SDL.vcproj.patched }" || exit /b
 move /Y VisualC\SDL\SDL.vcproj.patched VisualC\SDL\SDL.vcproj || exit /b
-powershell -Command "& { cat VisualC\SDLmain\SDLmain.vcxproj | %{$_ -replace \"dxguid.lib;\", \"\"} | Set-Content -Path VisualC\SDLmain\SDLmain.vcxproj.patched }" || exit /b
+powershell -Command "& { cat VisualC\SDLmain\SDLmain.vcxproj | \%{$_ -replace \"dxguid.lib;\", \"\"} | Set-Content -Path VisualC\SDLmain\SDLmain.vcxproj.patched }" || exit /b
 move /Y VisualC\SDLmain\SDLmain.vcxproj.patched VisualC\SDLmain\SDLmain.vcxproj || exit /b
-powershell -Command "& { cat VisualC\SDLmain\SDLmain.vcproj | %{$_ -replace \"dxguid.lib\", \"\"} | Set-Content -Path VisualC\SDLmain\SDLmain.vcproj.patched }" || exit /b
+powershell -Command "& { cat VisualC\SDLmain\SDLmain.vcproj | \%{$_ -replace \"dxguid.lib\", \"\"} | Set-Content -Path VisualC\SDLmain\SDLmain.vcproj.patched }" || exit /b
 move /Y VisualC\SDLmain\SDLmain.vcproj.patched VisualC\SDLmain\SDLmain.vcproj || exit /b
-powershell -Command "& { cat src\video\windx5\directx.h | %{$_ -replace \"#define _directx_h\", \"#define _directx_h`n#include `\"InitGuid.h`\"\"} | Set-Content -Path src\video\windx5\directx.h.patched }" || exit /b
+powershell -Command "& { cat src\video\windx5\directx.h | \%{$_ -replace \"#define _directx_h\", \"#define _directx_h`n#include `\"InitGuid.h`\"\"} | Set-Content -Path src\video\windx5\directx.h.patched }" || exit /b
 move /Y src\video\windx5\directx.h.patched src\video\windx5\directx.h || exit /b
 msbuild /p:Configuration=Release_NoSTDIO /p:PlatformToolset=v140_xp VisualC\SDL.sln || exit /b
 copy /Y VisualC\SDL\Release\SDL.dll ..\build\bin\ || exit /b
@@ -154,7 +154,7 @@ cd fluidsynth* || exit /b
 mkdir build || exit /b
 cd build || exit /b
 cmake -G "Visual Studio 14 2015" -T v140_xp -DCMAKE_PREFIX_PATH=..\fluidsynth-deps .. || exit /b
-powershell -Command "& { cat config_win32.h | %{$_ -replace \"#define snprintf _snprintf\", \"\"} | Set-Content -Path config_win32.h.patched }" || exit /b
+powershell -Command "& { cat config_win32.h | \%{$_ -replace \"#define snprintf _snprintf\", \"\"} | Set-Content -Path config_win32.h.patched }" || exit /b
 move /Y config_win32.h.patched config_win32.h || exit /b
 cmake --build . --config Release || exit /b
 cd .. || exit /b
