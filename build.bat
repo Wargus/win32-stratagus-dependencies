@@ -1,3 +1,5 @@
+ECHO ON
+
 mkdir build
 mkdir build\bin
 mkdir build\include
@@ -32,13 +34,13 @@ cd jpeg*
 copy /Y jconfig.vc jconfig.h
 nmake /E -f jpeg.mak
 copy /Y Release\jpeg.lib ..\build\lib\
-powershell -Command "& { cat jmorecfg.h | %{$_ -replace \"typedef long INT32;", \"\"} | Set-Content -Path jmorecfg.h.patched }"
+powershell -Command "& { cat jmorecfg.h | %{$_ -replace \"typedef long INT32;\", \"\"} | Set-Content -Path jmorecfg.h.patched }"
 move /Y jmorecfg.h.patched jmorecfg.h
 copy /Y *.h ..\build\include\
 cd ..
 
 REM ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/libpng-1.6.21.tar.gz
-cd lpng*
+cd libpng*
 mkdir build
 cd build
 cmake -G "Visual Studio 14 2015" -T v140_xp -DZLIB_LIBRARY=..\..\build\lib\zlib.lib -DZLIB_INCLUDE_DIR=..\..\build\include\ ..
@@ -79,17 +81,25 @@ cd ..
 REM http://downloads.xiph.org/releases/theora/libtheora-1.1.1.zip
 cd libtheora*
 move ..\libvorbis* ..\libvorbis
+devenv win32\VS2008\libtheora_static.sln /upgrade
 msbuild /p:Configuration=Release_SSE2 /p:PlatformToolset=v140_xp win32\VS2008\libtheora_static.sln /t:libtheora_static
 copy /Y win32\VS2008\Win32\Release_SSE2\libtheora_static.lib ..\build\lib\theora_static.lib
 mkdir ..\build\include\theora
 copy /Y include\theora\*.h ..\build\include\theora\
 cd ..
 
+REM cd lua5.1
+REM msbuild /p:Configuration=Release /p:PlatformToolset=v140_xp mak.vs2008\lua5.1.sln
+REM copy /Y lib\static\lua5.1.lib ..\build\lib\lua.lib
+REM copy /Y include\* ..\build\include\
+REM cd ..
+
 REM http://www.lua.org/ftp/lua-5.1.5.tar.gz
-cd lua5.1
-msbuild /p:Configuration=Release /p:PlatformToolset=v140_xp mak.vs2008\lua5.1.sln
-copy /Y lib\static\lua5.1.lib ..\build\lib\lua.lib
-copy /Y include\* ..\build\include\
+cd lua-5.1.5
+powershell -Command "& { cat etc/luavs.bat | %{$_ -replace \"cl\", \"cl /D_USING_V140_SDK71_\"} | Set-Content -Path etc/luavs-patched.bat }"
+etc\luavs-patched.bat
+copy /Y src\lua51.lib ..\build\lib\lua.lib
+copy /Y src\*.h ..\build\include\
 cd ..
 
 REM https://github.com/LuaDist/toluapp/archive/master.zip
@@ -119,6 +129,7 @@ cd ..
 
 REM https://www.libsdl.org/release/SDL-1.2.15.tar.gz
 cd SDL*
+devenv VisualC\SDL.sln /upgrade
 powershell -Command "& { cat VisualC\SDL\SDL.vcxproj | %{$_ -replace \"dxguid.lib;\", \"\"} | Set-Content -Path VisualC\SDL\SDL.vcxproj.patched }"
 move /Y VisualC\SDL\SDL.vcxproj.patched VisualC\SDL\SDL.vcxproj
 powershell -Command "& { cat VisualC\SDL\SDL.vcproj | %{$_ -replace \"dxguid.lib\", \"\"} | Set-Content -Path VisualC\SDL\SDL.vcproj.patched }"
