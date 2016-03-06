@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>GZlibDecompressor</title>
+<meta name="generator" content="DocBook XSL Stylesheets V1.75.2">
+<link rel="home" href="index.html" title="GIO Reference Manual">
+<link rel="up" href="conversion.html" title="Data conversion">
+<link rel="prev" href="GZlibCompressor.html" title="GZlibCompressor">
+<link rel="next" href="streaming.html" title="Streaming I/O">
+<meta name="generator" content="GTK-Doc V1.13 (XML mode)">
+<link rel="stylesheet" href="style.css" type="text/css">
+<link rel="part" href="pt01.html" title="Part I. GIO Overview">
+<link rel="chapter" href="ch01.html" title="Introduction">
+<link rel="chapter" href="ch02.html" title="Compiling GIO applications">
+<link rel="chapter" href="ch03.html" title="Running GIO applications">
+<link rel="chapter" href="extending-gio.html" title="Extending GIO">
+<link rel="part" href="pt02.html" title="Part II. API Reference">
+<link rel="chapter" href="file_ops.html" title="File Operations">
+<link rel="chapter" href="file_mon.html" title="File System Monitoring">
+<link rel="chapter" href="async.html" title="Asynchronous I/O">
+<link rel="chapter" href="conversion.html" title="Data conversion">
+<link rel="chapter" href="streaming.html" title="Streaming I/O">
+<link rel="chapter" href="types.html" title="File types and applications">
+<link rel="chapter" href="volume_mon.html" title="Volumes and Drives">
+<link rel="chapter" href="icons.html" title="Icons">
+<link rel="chapter" href="failable_initialization.html" title="Failable Initialization">
+<link rel="chapter" href="networking.html" title="Lowlevel platform-independent network support">
+<link rel="chapter" href="resolver.html" title="DNS resolution">
+<link rel="chapter" href="highlevel-socket.html" title="Highlevel network functionallity">
+<link rel="chapter" href="utils.html" title="Utilities">
+<link rel="chapter" href="extending.html" title="Extending GIO">
+<link rel="part" href="migrating.html" title="Part III. Migrating to GIO">
+<link rel="chapter" href="ch19.html" title="Migrating from POSIX to GIO">
+<link rel="chapter" href="ch20.html" title="Migrating from GnomeVFS to GIO">
+<link rel="chapter" href="gio-hierarchy.html" title="Object Hierarchy">
+<link rel="index" href="api-index-full.html" title="Index">
+<link rel="index" href="api-index-deprecated.html" title="Index of deprecated symbols">
+<link rel="index" href="api-index-2-18.html" title="Index of new symbols in 2.18">
+<link rel="index" href="api-index-2-20.html" title="Index of new symbols in 2.20">
+<link rel="index" href="api-index-2-22.html" title="Index of new symbols in 2.22">
+<link rel="index" href="api-index-2-24.html" title="Index of new symbols in 2.24">
+</head>
+<body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF">
+<table class="navigation" id="top" width="100%" summary="Navigation header" cellpadding="2" cellspacing="2">
+<tr valign="middle">
+<td><a accesskey="p" href="GZlibCompressor.html"><img src="left.png" width="24" height="24" border="0" alt="Prev"></a></td>
+<td><a accesskey="u" href="conversion.html"><img src="up.png" width="24" height="24" border="0" alt="Up"></a></td>
+<td><a accesskey="h" href="index.html"><img src="home.png" width="24" height="24" border="0" alt="Home"></a></td>
+<th width="100%" align="center">GIO Reference Manual</th>
+<td><a accesskey="n" href="streaming.html"><img src="right.png" width="24" height="24" border="0" alt="Next"></a></td>
+</tr>
+<tr><td colspan="5" class="shortcuts">
+<a href="#GZlibDecompressor.synopsis" class="shortcut">Top</a>
+                   | 
+                  <a href="#GZlibDecompressor.description" class="shortcut">Description</a>
+                   | 
+                  <a href="#GZlibDecompressor.object-hierarchy" class="shortcut">Object Hierarchy</a>
+                   | 
+                  <a href="#GZlibDecompressor.implemented-interfaces" class="shortcut">Implemented Interfaces</a>
+                   | 
+                  <a href="#GZlibDecompressor.properties" class="shortcut">Properties</a>
+</td></tr>
+</table>
+<div class="refentry" title="GZlibDecompressor">
+<a name="GZlibDecompressor"></a><div class="titlepage"></div>
+<div class="refnamediv"><table width="100%"><tr>
+<td valign="top">
+<h2><span class="refentrytitle"><a name="GZlibDecompressor.top_of_page"></a>GZlibDecompressor</span></h2>
+<p>GZlibDecompressor — Zlib decompressor</p>
+</td>
+<td valign="top" align="right"></td>
+</tr></table></div>
+<div class="refsynopsisdiv" title="Synopsis">
+<a name="GZlibDecompressor.synopsis"></a><h2>Synopsis</h2>
+<pre class="synopsis">
+#include &lt;gio/gio.h&gt;
+
+                    <a class="link" href="GZlibDecompressor.html#GZlibDecompressor-struct" title="GZlibDecompressor">GZlibDecompressor</a>;
+<a class="link" href="GZlibDecompressor.html" title="GZlibDecompressor"><span class="returnvalue">GZlibDecompressor</span></a> * <a class="link" href="GZlibDecompressor.html#g-zlib-decompressor-new" title="g_zlib_decompressor_new ()">g_zlib_decompressor_new</a>             (<a class="link" href="GZlibCompressor.html#GZlibCompressorFormat" title="enum GZlibCompressorFormat"><span class="returnvalue">GZlibCompressorFormat</span></a> format);
+</pre>
+</div>
+<div class="refsect1" title="Object Hierarchy">
+<a name="GZlibDecompressor.object-hierarchy"></a><h2>Object Hierarchy</h2>
+<pre class="synopsis">
+  <a href="http://library.gnome.org/devel/gobject/unstable/gobject-The-Base-Object-Type.html#GObject">GObject</a>
+   +----GZlibDecompressor
+</pre>
+</div>
+<div class="refsect1" title="Implemented Interfaces">
+<a name="GZlibDecompressor.implemented-interfaces"></a><h2>Implemented Interfaces</h2>
+<p>
+GZlibDecompressor implements
+ <a class="link" href="GConverter.html" title="GConverter">GConverter</a>.</p>
+</div>
+<div class="refsect1" title="Properties">
+<a name="GZlibDecompressor.properties"></a><h2>Properties</h2>
+<pre class="synopsis">
+  "<a class="link" href="GZlibDecompressor.html#GZlibDecompressor--format" title='The "format" property'>format</a>"                   <a class="link" href="GZlibCompressor.html#GZlibCompressorFormat" title="enum GZlibCompressorFormat"><span class="type">GZlibCompressorFormat</span></a>  : Read / Write / Construct Only
+</pre>
+</div>
+<div class="refsect1" title="Description">
+<a name="GZlibDecompressor.description"></a><h2>Description</h2>
+<p>
+<a class="link" href="GZlibDecompressor.html" title="GZlibDecompressor"><span class="type">GZlibDecompressor</span></a> is an implementation of <a class="link" href="GConverter.html" title="GConverter"><span class="type">GConverter</span></a> that
+decompresses data compressed with zlib.</p>
+</div>
+<div class="refsect1" title="Details">
+<a name="GZlibDecompressor.details"></a><h2>Details</h2>
+<div class="refsect2" title="GZlibDecompressor">
+<a name="GZlibDecompressor-struct"></a><h3>GZlibDecompressor</h3>
+<pre class="programlisting">typedef struct _GZlibDecompressor GZlibDecompressor;</pre>
+<p>
+Zlib decompression</p>
+</div>
+<hr>
+<div class="refsect2" title="g_zlib_decompressor_new ()">
+<a name="g-zlib-decompressor-new"></a><h3>g_zlib_decompressor_new ()</h3>
+<pre class="programlisting"><a class="link" href="GZlibDecompressor.html" title="GZlibDecompressor"><span class="returnvalue">GZlibDecompressor</span></a> * g_zlib_decompressor_new             (<a class="link" href="GZlibCompressor.html#GZlibCompressorFormat" title="enum GZlibCompressorFormat"><span class="returnvalue">GZlibCompressorFormat</span></a> format);</pre>
+<p>
+Creates a new <a class="link" href="GZlibDecompressor.html" title="GZlibDecompressor"><span class="type">GZlibDecompressor</span></a>.</p>
+<div class="variablelist"><table border="0">
+<col align="left" valign="top">
+<tbody>
+<tr>
+<td><p><span class="term"><em class="parameter"><code>format</code></em> :</span></p></td>
+<td> The format to use for the compressed data
+</td>
+</tr>
+<tr>
+<td><p><span class="term"><span class="emphasis"><em>Returns</em></span> :</span></p></td>
+<td> a new <a class="link" href="GZlibDecompressor.html" title="GZlibDecompressor"><span class="type">GZlibDecompressor</span></a>
+
+</td>
+</tr>
+</tbody>
+</table></div>
+<p class="since">Since 2.24</p>
+</div>
+</div>
+<div class="refsect1" title="Property Details">
+<a name="GZlibDecompressor.property-details"></a><h2>Property Details</h2>
+<div class="refsect2" title='The "format" property'>
+<a name="GZlibDecompressor--format"></a><h3>The <code class="literal">"format"</code> property</h3>
+<pre class="programlisting">  "format"                   <a class="link" href="GZlibCompressor.html#GZlibCompressorFormat" title="enum GZlibCompressorFormat"><span class="type">GZlibCompressorFormat</span></a>  : Read / Write / Construct Only</pre>
+<p>The format of the compressed data.</p>
+<p>Default value: G_ZLIB_COMPRESSOR_FORMAT_ZLIB</p>
+</div>
+</div>
+</div>
+<div class="footer">
+<hr>
+          Generated by GTK-Doc V1.13</div>
+</body>
+</html>
