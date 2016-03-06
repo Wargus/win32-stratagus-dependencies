@@ -19,7 +19,7 @@ cd .. || exit /b
 
 REM http://zlib.net/zlib-1.2.8.tar.gz || exit /b
 cd zlib* || exit /b
-mkdir build || exit /b
+mkdir build
 cd build || exit /b
 cmake -G "Visual Studio 14 2015" -T v140_xp .. || exit /b
 cmake --build . --config Release || exit /b
@@ -41,7 +41,7 @@ cd .. || exit /b
 
 REM ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/libpng-1.6.21.tar.gz || exit /b
 cd libpng* || exit /b
-mkdir build || exit /b
+mkdir build
 cd build || exit /b
 cmake -G "Visual Studio 14 2015" -T v140_xp -DZLIB_LIBRARY=..\..\build\lib\zlib.lib -DZLIB_INCLUDE_DIR=..\..\build\include\ .. || exit /b
 cmake --build . --config Release || exit /b
@@ -64,7 +64,7 @@ REM http://downloads.xiph.org/releases/ogg/libogg-1.3.2.tar.gz || exit /b
 cd libogg* || exit /b
 msbuild /p:Configuration=Release /p:PlatformToolset=v140_xp win32\VS2010\libogg_static.sln || exit /b
 copy /Y win32\VS2010\Win32\Release\libogg_static.lib ..\build\lib\ogg_static.lib || exit /b
-mkdir ..\build\include\ogg || exit /b
+mkdir ..\build\include\ogg
 copy /Y include\ogg\*.h ..\build\include\ogg\ || exit /b
 cd .. || exit /b
 
@@ -74,7 +74,7 @@ move ..\libogg* ..\libogg || exit /b
 msbuild /p:Configuration=Release /p:PlatformToolset=v140_xp win32\VS2010\vorbis_static.sln || exit /b
 copy /Y win32\VS2010\Win32\Release\libvorbis_static.lib ..\build\lib\vorbis_static.lib || exit /b
 copy /Y win32\VS2010\Win32\Release\libvorbisfile_static.lib ..\build\lib\vorbisfile_static.lib || exit /b
-mkdir ..\build\include\vorbis || exit /b
+mkdir ..\build\include\vorbis
 copy /Y include\vorbis\*.h ..\build\include\vorbis\ || exit /b
 cd .. || exit /b
 
@@ -84,7 +84,7 @@ move ..\libvorbis* ..\libvorbis || exit /b
 devenv win32\VS2008\libtheora_static.sln /upgrade || exit /b
 msbuild /p:Configuration=Release_SSE2 /p:PlatformToolset=v140_xp win32\VS2008\libtheora_static.sln /t:libtheora_static || exit /b
 copy /Y win32\VS2008\Win32\Release_SSE2\libtheora_static.lib ..\build\lib\theora_static.lib || exit /b
-mkdir ..\build\include\theora || exit /b
+mkdir ..\build\include\theora
 copy /Y include\theora\*.h ..\build\include\theora\ || exit /b
 cd .. || exit /b
 
@@ -104,7 +104,7 @@ cd ..
 
 REM https://github.com/LuaDist/toluapp/archive/master.zip || exit /b
 cd toluapp* || exit /b
-mkdir build || exit /b
+mkdir build
 powershell -Command "& { cat CMakeLists.txt | %%{$_ -replace [Regex]::Escape(\"add_library ( toluapp_lib \"), \"add_library ( toluapp_lib STATIC \"} | Set-Content -Path CMakeLists.txt.patched }" || exit /b
 move /Y CMakeLists.txt.patched CMakeLists.txt || exit /b
 cd build || exit /b
@@ -118,7 +118,7 @@ cd .. || exit /b
 
 REM https://github.com/ladislav-zezula/StormLib/archive/master.zip || exit /b
 cd StormLib* || exit /b
-mkdir build || exit /b
+mkdir build
 cd build || exit /b
 cmake -G "Visual Studio 14 2015" -T v140_xp -DCMAKE_PREFIX_PATH=..\build -DWITH_STATIC=ON .. || exit /b
 cmake --build . --config Release || exit /b
@@ -151,14 +151,14 @@ cd .. || exit /b
 
 REM https://sourceforge.net/projects/fluidsynth/files/fluidsynth-1.1.6/fluidsynth-1.1.6.tar.gz/download || exit /b
 cd fluidsynth* || exit /b
-mkdir build || exit /b
+mkdir build
 cd build || exit /b
 cmake -G "Visual Studio 14 2015" -T v140_xp -DCMAKE_PREFIX_PATH=..\fluidsynth-deps .. || exit /b
 powershell -Command "& { cat config_win32.h | %%{$_ -replace \"#define snprintf _snprintf\", \"\"} | Set-Content -Path config_win32.h.patched }" || exit /b
 move /Y config_win32.h.patched config_win32.h || exit /b
 cmake --build . --config Release || exit /b
 cd .. || exit /b
-mkdir ..\build\include\fluidsynth || exit /b
+mkdir ..\build\include\fluidsynth
 copy /Y include\fluidsynth\*.h ..\build\include\fluidsynth\ || exit /b
 copy /Y include\fluidsynth.h ..\build\include\ || exit /b
 copy /Y build\include\fluidsynth\*.h ..\build\include\fluidsynth\ || exit /b
