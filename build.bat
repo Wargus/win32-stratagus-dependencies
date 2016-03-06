@@ -96,8 +96,8 @@ REM cd .. || exit /b
 
 REM http://www.lua.org/ftp/lua-5.1.5.tar.gz || exit /b
 cd lua-5.1.5 || exit /b
-powershell -Command "& { cat etc/luavs.bat | %%{$_ -replace \"cl\", \"cl /D_USING_V140_SDK71_\"} | Set-Content -Path etc/luavs-patched.bat }" || exit /b
-etc\luavs-patched.bat || exit /b
+powershell -Command "& { cat etc/luavs.bat | %%{$_ -replace \"cl\", \"%CC%\"} | Set-Content -Path etc/luavs-patched.bat }" || exit /b
+etc\luavs-patched.bat
 copy /Y src\lua51.lib ..\build\lib\lua.lib || exit /b
 copy /Y src\*.h ..\build\include\ || exit /b
 cd .. || exit /b
