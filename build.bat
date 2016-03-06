@@ -1,9 +1,9 @@
 ECHO ON
 
-mkdir build || exit /b
-mkdir build\bin || exit /b
-mkdir build\include || exit /b
-mkdir build\lib || exit /b
+mkdir build
+mkdir build\bin
+mkdir build\include
+mkdir build\lib
 
 set CC=cl /D_USING_V140_SDK71_ || exit /b
 set INCLUDE=..\build\include;$(DXSDK_DIR)Include;%INCLUDE% || exit /b
