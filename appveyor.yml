@@ -1,0 +1,18 @@
+shallow_clone: true
+build_script:
+  - build.bat
+  - move build dependencies
+  - 7z a dependencies.zip dependencies\
+artifacts:
+  - path: dependencies.zip
+deploy:
+  release: master-builds
+  description: 'Automatic builds from the master branch'
+  provider: GitHub
+  auth_token:
+    secure: NMy2KE3EpZTjverxNzEAoBnlV+7VLGvwy3e1WEIrliFy3R1oxuT+AgGUDcRwv9y/
+  artifact: /.*zip/
+  draft: false
+  prerelease: true
+  on:
+    branch: master
