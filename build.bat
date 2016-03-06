@@ -46,7 +46,7 @@ cd build || exit /b
 cmake -G "Visual Studio 14 2015" -T v140_xp -DZLIB_LIBRARY=..\..\build\lib\zlib.lib -DZLIB_INCLUDE_DIR=..\..\build\include\ .. || exit /b
 cmake --build . --config Release || exit /b
 cd .. || exit /b
-copy /Y build\Release\libpng*_static.lib ..\build\lib\libpng.lib || exit /b
+copy /Y build\Release\libpng16_static.lib ..\build\lib\libpng.lib || exit /b
 copy /Y build\pnglibconf.h ..\build\include\ || exit /b
 copy /Y png*.h ..\build\include\ || exit /b
 cd .. || exit /b
