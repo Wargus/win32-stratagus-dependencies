@@ -1,5 +1,8 @@
+os: Visual Studio 2015
 shallow_clone: true
+install:
 build_script:
+  - "C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86
   - build.bat
   - move build dependencies
   - 7z a dependencies.zip dependencies\
