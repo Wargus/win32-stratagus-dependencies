@@ -9,13 +9,23 @@ build_script:
 artifacts:
   - path: dependencies.zip
 deploy:
-  release: master-builds
-  description: 'Automatic builds from the master branch'
-  provider: GitHub
-  auth_token:
-    secure: NMy2KE3EpZTjverxNzEAoBnlV+7VLGvwy3e1WEIrliFy3R1oxuT+AgGUDcRwv9y/
-  artifact: /.*zip/
-  draft: false
-  prerelease: true
-  on:
-    branch: master
+  - provider: GitHub
+    release: master-builds
+    description: 'Automatic builds from the master branch'
+    auth_token:
+      secure: NMy2KE3EpZTjverxNzEAoBnlV+7VLGvwy3e1WEIrliFy3R1oxuT+AgGUDcRwv9y/
+    artifact: /.*zip/
+    draft: false
+    prerelease: true
+    on:
+      branch: master
+  - provider: GitHub
+    release: $(APPVEYOR_REPO_TAG_NAME)
+    description: 'Release'
+    auth_token:
+      secure: NMy2KE3EpZTjverxNzEAoBnlV+7VLGvwy3e1WEIrliFy3R1oxuT+AgGUDcRwv9y/
+    artifact: /.*zip/
+    draft: false
+    prerelease: false
+    on:
+      appveyor_repo_tag: true
