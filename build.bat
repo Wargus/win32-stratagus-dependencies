@@ -98,13 +98,23 @@ REM copy /Y include\* ..\build\include\ || exit /b
 REM cd .. || exit /b
 
 REM http://www.lua.org/ftp/lua-5.1.5.tar.gz || exit /b
-cd lua-5.1.5 || exit /b
-powershell -Command "& { cat etc/luavs.bat | %%{$_ -replace \"cl\", \"%CC%\"} | Set-Content -Path etc/luavs-patched.bat }" || exit /b
-call etc\luavs-patched.bat
+REM cd lua-5.1.5 || exit /b
+REM powershell -Command "& { cat etc/luavs.bat | %%{$_ -replace \"cl\", \"%CC%\"} | Set-Content -Path etc/luavs-patched.bat }" || exit /b
+REM call etc\luavs-patched.bat
+REM copy /Y src\lua51.lib ..\build\lib\lua.lib || exit /b
+REM copy /Y src\lua51.dll ..\build\bin\ || exit /b
+REM copy /Y src\*.h ..\build\include\ || exit /b
+REM cd ..
+
+REM https://github.com/LuaJIT/LuaJIT/archive/master.zip || exit /b
+cd luajit* || exit /b
+cd src || exit /b
+msvcbuild || exit /b
+cd .. || exit /b
 copy /Y src\lua51.lib ..\build\lib\lua.lib || exit /b
 copy /Y src\lua51.dll ..\build\bin\ || exit /b
 copy /Y src\*.h ..\build\include\ || exit /b
-cd ..
+cd .. || exit /b
 
 REM https://github.com/LuaDist/toluapp/archive/master.zip || exit /b
 cd toluapp* || exit /b
