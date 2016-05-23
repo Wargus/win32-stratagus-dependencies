@@ -5,7 +5,10 @@ mkdir build\bin
 mkdir build\include
 mkdir build\lib
 
-set CC=cl /D_USING_V140_SDK71_ || exit /b
+set CL=/D_USING_V120_SDK71_ || exit /b
+set _CL_=/D_USING_V120_SDK71_ || exit /b
+set LINK=/SUBSYSTEM:CONSOLE,"5.01" || exit /b
+set _LINK_=/SUBSYSTEM:CONSOLE,"5.01" || exit /b
 set INCLUDE=..\build\include;$(DXSDK_DIR)Include;%INCLUDE% || exit /b
 set LIB=..\build\lib;$(DXSDK_DIR)Lib\x86;%LIB% || exit /b
 
