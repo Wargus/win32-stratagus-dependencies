@@ -1,5 +1,7 @@
 ECHO ON
 
+set PATH=%PATH%;"C:\Program Files (x86)\CMake\bin"
+
 mkdir build
 mkdir build\bin
 mkdir build\include
