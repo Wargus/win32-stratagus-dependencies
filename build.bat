@@ -91,13 +91,9 @@ mkdir ..\build\include\theora
 copy /Y include\theora\*.h ..\build\include\theora\ || exit /b
 cd .. || exit /b
 
-REM cd lua5.1 || exit /b
-REM msbuild /p:Configuration=Release /p:PlatformToolset=v140_xp mak.vs2008\lua5.1.sln || exit /b
-REM copy /Y lib\static\lua5.1.lib ..\build\lib\lua.lib || exit /b
-REM copy /Y include\* ..\build\include\ || exit /b
-REM cd .. || exit /b
-
 REM http://www.lua.org/ftp/lua-5.1.5.tar.gz || exit /b
+set LINK=
+set _LINK_=
 cd lua-5.1.5 || exit /b
 powershell -Command "& { cat etc/luavs.bat | %%{$_ -replace \"cl\", \"%CC%\"} | Set-Content -Path etc/luavs-patched.bat }" || exit /b
 call etc\luavs-patched.bat
@@ -105,6 +101,8 @@ copy /Y src\lua51.lib ..\build\lib\lua.lib || exit /b
 copy /Y src\lua51.dll ..\build\bin\ || exit /b
 copy /Y src\*.h ..\build\include\ || exit /b
 cd ..
+set LINK=/SUBSYSTEM:CONSOLE,"5.01" || exit /b
+set _LINK_=/SUBSYSTEM:CONSOLE,"5.01" || exit /b
 
 REM https://github.com/LuaDist/toluapp/archive/master.zip || exit /b
 cd toluapp* || exit /b
