@@ -7,12 +7,41 @@ mkdir build\bin
 mkdir build\include
 mkdir build\lib
 
+REM cd lua5.1 || exit /b
+REM msbuild /p:Configuration=Release /p:PlatformToolset=v140_xp mak.vs2008\lua5.1.sln || exit /b
+REM copy /Y lib\static\lua5.1.lib ..\build\lib\lua.lib || exit /b
+REM copy /Y include\* ..\build\include\ || exit /b
+REM cd .. || exit /b
+
+REM http://www.lua.org/ftp/lua-5.1.5.tar.gz || exit /b
+cd lua-5.1.5 || exit /b
+powershell -Command "& { cat etc/luavs.bat | %%{$_ -replace \"cl\", \"%CC%\"} | Set-Content -Path etc/luavs-patched.bat }" || exit /b
+call etc\luavs-patched.bat
+copy /Y src\lua51.lib ..\build\lib\lua.lib || exit /b
+copy /Y src\lua51.dll ..\build\bin\ || exit /b
+copy /Y src\*.h ..\build\include\ || exit /b
+cd ..
+
 set CL=/D_USING_V120_SDK71_ || exit /b
 set _CL_=/D_USING_V120_SDK71_ || exit /b
 set LINK=/SUBSYSTEM:CONSOLE,"5.01" || exit /b
 set _LINK_=/SUBSYSTEM:CONSOLE,"5.01" || exit /b
 set INCLUDE=..\build\include;$(DXSDK_DIR)Include;%INCLUDE% || exit /b
 set LIB=..\build\lib;$(DXSDK_DIR)Lib\x86;%LIB% || exit /b
+
+REM https://github.com/LuaDist/toluapp/archive/master.zip || exit /b
+cd toluapp* || exit /b
+mkdir build
+powershell -Command "& { cat CMakeLists.txt | %%{$_ -replace [Regex]::Escape(\"add_library ( toluapp_lib \"), \"add_library ( toluapp_lib STATIC \"} | Set-Content -Path CMakeLists.txt.patched }" || exit /b
+move /Y CMakeLists.txt.patched CMakeLists.txt || exit /b
+cd build || exit /b
+cmake -G "Visual Studio 14 2015" -T v140_xp -DCMAKE_PREFIX_PATH=..\build .. || exit /b
+cmake --build . --config Release || exit /b
+cd .. || exit /b
+copy /Y build\Release\toluapp.exe ..\build\bin\ || exit /b
+copy /Y build\Release\toluapp.lib ..\build\lib\ || exit /b
+copy /Y include\*.h ..\build\include\ || exit /b
+cd .. || exit /b
 
 REM http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz || exit /b
 cd bzip2* || exit /b
@@ -93,21 +122,6 @@ mkdir ..\build\include\theora
 copy /Y include\theora\*.h ..\build\include\theora\ || exit /b
 cd .. || exit /b
 
-REM cd lua5.1 || exit /b
-REM msbuild /p:Configuration=Release /p:PlatformToolset=v140_xp mak.vs2008\lua5.1.sln || exit /b
-REM copy /Y lib\static\lua5.1.lib ..\build\lib\lua.lib || exit /b
-REM copy /Y include\* ..\build\include\ || exit /b
-REM cd .. || exit /b
-
-REM http://www.lua.org/ftp/lua-5.1.5.tar.gz || exit /b
-REM cd lua-5.1.5 || exit /b
-REM powershell -Command "& { cat etc/luavs.bat | %%{$_ -replace \"cl\", \"%CC%\"} | Set-Content -Path etc/luavs-patched.bat }" || exit /b
-REM call etc\luavs-patched.bat
-REM copy /Y src\lua51.lib ..\build\lib\lua.lib || exit /b
-REM copy /Y src\lua51.dll ..\build\bin\ || exit /b
-REM copy /Y src\*.h ..\build\include\ || exit /b
-REM cd ..
-
 REM https://github.com/LuaJIT/LuaJIT/archive/master.zip || exit /b
 cd luajit* || exit /b
 cd src || exit /b
@@ -116,20 +130,6 @@ cd .. || exit /b
 copy /Y src\lua51.lib ..\build\lib\lua.lib || exit /b
 copy /Y src\lua51.dll ..\build\bin\ || exit /b
 copy /Y src\*.h ..\build\include\ || exit /b
-cd .. || exit /b
-
-REM https://github.com/LuaDist/toluapp/archive/master.zip || exit /b
-cd toluapp* || exit /b
-mkdir build
-powershell -Command "& { cat CMakeLists.txt | %%{$_ -replace [Regex]::Escape(\"add_library ( toluapp_lib \"), \"add_library ( toluapp_lib STATIC \"} | Set-Content -Path CMakeLists.txt.patched }" || exit /b
-move /Y CMakeLists.txt.patched CMakeLists.txt || exit /b
-cd build || exit /b
-cmake -G "Visual Studio 14 2015" -T v140_xp -DCMAKE_PREFIX_PATH=..\build .. || exit /b
-cmake --build . --config Release || exit /b
-cd .. || exit /b
-copy /Y build\Release\toluapp.exe ..\build\bin\ || exit /b
-copy /Y build\Release\toluapp.lib ..\build\lib\ || exit /b
-copy /Y include\*.h ..\build\include\ || exit /b
 cd .. || exit /b
 
 REM https://github.com/ladislav-zezula/StormLib/archive/master.zip || exit /b
