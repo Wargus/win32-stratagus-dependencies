@@ -113,16 +113,6 @@ copy /Y build\Release\toluapp.lib ..\build\lib\ || exit /b
 copy /Y include\*.h ..\build\include\ || exit /b
 cd .. || exit /b
 
-REM git clone http://luajit.org/git/luajit-2.0.git ... submodule
-cd luajit* || exit /b
-cd src || exit /b
-cmd /c msvcbuild
-cd ..
-copy /Y src\lua51.lib ..\build\lib\lua.lib || exit /b
-copy /Y src\lua51.dll ..\build\bin\ || exit /b
-copy /Y src\*.h ..\build\include\ || exit /b
-cd ..
-
 REM https://github.com/ladislav-zezula/StormLib/archive/master.zip || exit /b
 cd StormLib* || exit /b
 mkdir build
