@@ -124,44 +124,23 @@ copy /Y build\Release\storm.lib ..\build\lib\ || exit /b
 copy /Y src\*.h ..\build\include\ || exit /b
 cd .. || exit /b
 
-REM https://www.libsdl.org/release/SDL-1.2.15.tar.gz || exit /b
-cd SDL* || exit /b
-devenv VisualC\SDL.sln /upgrade || exit /b
-powershell -Command "& { cat VisualC\SDL\SDL.vcxproj | %%{$_ -replace \"dxguid.lib;\", \"\"} | Set-Content -Path VisualC\SDL\SDL.vcxproj.patched }" || exit /b
-move /Y VisualC\SDL\SDL.vcxproj.patched VisualC\SDL\SDL.vcxproj || exit /b
-powershell -Command "& { cat VisualC\SDL\SDL.vcproj | %%{$_ -replace \"dxguid.lib\", \"\"} | Set-Content -Path VisualC\SDL\SDL.vcproj.patched }" || exit /b
-move /Y VisualC\SDL\SDL.vcproj.patched VisualC\SDL\SDL.vcproj || exit /b
-powershell -Command "& { cat VisualC\SDLmain\SDLmain.vcxproj | %%{$_ -replace \"dxguid.lib;\", \"\"} | Set-Content -Path VisualC\SDLmain\SDLmain.vcxproj.patched }" || exit /b
-move /Y VisualC\SDLmain\SDLmain.vcxproj.patched VisualC\SDLmain\SDLmain.vcxproj || exit /b
-powershell -Command "& { cat VisualC\SDLmain\SDLmain.vcproj | %%{$_ -replace \"dxguid.lib\", \"\"} | Set-Content -Path VisualC\SDLmain\SDLmain.vcproj.patched }" || exit /b
-move /Y VisualC\SDLmain\SDLmain.vcproj.patched VisualC\SDLmain\SDLmain.vcproj || exit /b
-powershell -Command "& { cat src\video\windx5\directx.h | %%{$_ -replace \"#define _directx_h\", \"#define _directx_h`n#include `\"InitGuid.h`\"\"} | Set-Content -Path src\video\windx5\directx.h.patched }" || exit /b
-move /Y src\video\windx5\directx.h.patched src\video\windx5\directx.h || exit /b
-msbuild /p:Configuration=Release_NoSTDIO /p:PlatformToolset=v140_xp VisualC\SDL.sln || exit /b
-copy /Y VisualC\SDL\Release\SDL.dll ..\build\bin\ || exit /b
-copy /Y VisualC\SDL\Release\SDL.dll ..\build\lib\ || exit /b
-copy /Y VisualC\Release\SDL.lib ..\build\lib\ || exit /b
-copy /Y VisualC\SDLmain\Release_NOSTDIO\SDLmain.lib ..\build\lib\ || exit /b
+REM https://www.libsdl.org/release/SDL2-devel-2.0.12-VC.zip
+cd SDL2-2.0.12 || exit /b
+copy /Y lib\x86\*.dll ..\build\bin\ || exit /b
+copy /Y lib\x86\*.lib ..\build\lib\ || exit /b
 copy /Y include\*.h ..\build\include\ || exit /b
-copy /Y VisualC\SDL\*.h ..\build\include\ || exit /b
 cd .. || exit /b
 
-REM https://sourceforge.net/projects/fluidsynth/files/fluidsynth-1.1.6/fluidsynth-1.1.6.tar.gz/download || exit /b
-cd fluidsynth* || exit /b
-mkdir build
-cd build || exit /b
-cmake -G "Visual Studio 14 2015" -T v140_xp -DCMAKE_PREFIX_PATH=..\fluidsynth-deps .. || exit /b
-powershell -Command "& { cat config_win32.h | %%{$_ -replace \"#define snprintf _snprintf\", \"\"} | Set-Content -Path config_win32.h.patched }" || exit /b
-move /Y config_win32.h.patched config_win32.h || exit /b
-cmake --build . --config Release || exit /b
+REM https://www.libsdl.org/projects/SDL_mixer/release/SDL2_mixer-devel-2.0.4-VC.zip
+cd SDL2_mixer-2.0.4 || exit /b
+copy /Y lib\x86\*.dll ..\build\bin\ || exit /b
+copy /Y lib\x86\*.lib ..\build\lib\ || exit /b
+copy /Y include\*.h ..\build\include\ || exit /b
 cd .. || exit /b
-mkdir ..\build\include\fluidsynth
-copy /Y include\fluidsynth\*.h ..\build\include\fluidsynth\ || exit /b
-copy /Y include\fluidsynth.h ..\build\include\ || exit /b
-copy /Y build\include\fluidsynth\*.h ..\build\include\fluidsynth\ || exit /b
-copy /Y build\src\Release\fluidsynth.lib ..\build\lib\ || exit /b
-copy /Y build\src\Release\libfluidsynth.dll ..\build\lib\ || exit /b
-copy /Y build\src\Release\libfluidsynth.dll ..\build\bin\ || exit /b
-copy /Y ..\fluidsynth-deps\bin\libglib*.dll ..\build\bin\ || exit /b
-copy /Y ..\fluidsynth-deps\bin\libgthread*.dll ..\build\bin\ || exit /b
+
+REM https://www.libsdl.org/projects/SDL_image/release/SDL2_image-devel-2.0.5-VC.zip
+cd SDL2_image-2.0.5 || exit /b
+copy /Y lib\x86\*.dll ..\build\bin\ || exit /b
+copy /Y lib\x86\*.lib ..\build\lib\ || exit /b
+copy /Y include\*.h ..\build\include\ || exit /b
 cd .. || exit /b
