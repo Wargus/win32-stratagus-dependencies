@@ -12,7 +12,7 @@ set _LINK_=/SUBSYSTEM:CONSOLE,"5.01" || exit /b
 set INCLUDE=..\build\include;$(DXSDK_DIR)Include;%INCLUDE% || exit /b
 set LIB=..\build\lib;$(DXSDK_DIR)Lib\x86;%LIB% || exit /b
 
-REM http://www.bzip.org/1.0.6/bzip2-1.0.6.tar.gz || exit /b
+REM https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz || exit /b
 cd bzip2* || exit /b
 nmake /E -f makefile.msc || exit /b
 copy /Y bzlib.h ..\build\include\bzlib.h || exit /b
@@ -20,7 +20,7 @@ copy /Y bzlib_private.h ..\build\include\bzlib_private.h || exit /b
 copy /Y libbz2.lib ..\build\lib\bz2.lib || exit /b
 cd .. || exit /b
 
-REM http://zlib.net/zlib-1.2.8.tar.gz || exit /b
+REM https://www.zlib.net/zlib-1.2.11.tar.gz || exit /b
 cd zlib* || exit /b
 mkdir build
 cd build || exit /b
@@ -32,7 +32,7 @@ copy /Y build\zconf.h ..\build\include\ || exit /b
 copy /Y zlib.h ..\build\include\ || exit /b
 cd .. || exit /b
 
-REM http://www.ijg.org/files/jpegsrc.v6b.tar.gz || exit /b
+REM https://www.ijg.org/files/jpegsr9d.zip || exit /b
 cd jpeg* || exit /b
 copy /Y jconfig.vc jconfig.h || exit /b
 nmake /E -f jpeg.mak || exit /b
@@ -42,7 +42,7 @@ move /Y jmorecfg.h.patched jmorecfg.h || exit /b
 copy /Y *.h ..\build\include\ || exit /b
 cd .. || exit /b
 
-REM ftp://ftp.simplesystems.org/pub/libpng/png/src/libpng16/libpng-1.6.21.tar.gz || exit /b
+REM http://prdownloads.sourceforge.net/libpng/lpng1637.zip?download || exit /b
 cd libpng* || exit /b
 mkdir build
 cd build || exit /b
@@ -54,7 +54,7 @@ copy /Y build\pnglibconf.h ..\build\include\ || exit /b
 copy /Y png*.h ..\build\include\ || exit /b
 cd .. || exit /b
 
-REM http://downloads.sourceforge.net/project/libmng/libmng-devel/1.0.10/libmng-1.0.10.tar.gz?use_mirror=freefr || exit /b
+REM http://prdownloads.sourceforge.net/libmng/lm010010.zip?download || exit /b
 cd libmng* || exit /b
 powershell -Command "& { cat makefiles/makefile.vcwin32 | %%{$_ -replace \"0\", \"O\"} | Set-Content -Path makefiles/makefile.vcwin32.patched }" || exit /b
 move /Y makefiles\makefile.vcwin32.patched makefiles\makefile.vcwin32 || exit /b
@@ -63,7 +63,7 @@ copy /Y libmng.lib ..\build\lib\mng.lib || exit /b
 copy /Y libmng*.h ..\build\include\ || exit /b
 cd .. || exit /b
 
-REM http://downloads.xiph.org/releases/ogg/libogg-1.3.2.tar.gz || exit /b
+REM https://downloads.xiph.org/releases/ogg/libogg-1.3.5.zip || exit /b
 cd libogg* || exit /b
 msbuild /p:Configuration=Release /p:PlatformToolset=v140_xp win32\VS2010\libogg_static.sln || exit /b
 copy /Y win32\VS2010\Win32\Release\libogg_static.lib ..\build\lib\ogg_static.lib || exit /b
@@ -71,7 +71,7 @@ mkdir ..\build\include\ogg
 copy /Y include\ogg\*.h ..\build\include\ogg\ || exit /b
 cd .. || exit /b
 
-REM http://downloads.xiph.org/releases/vorbis/libvorbis-1.3.5.tar.gz || exit /b
+REM https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.zip || exit /b
 cd libvorbis* || exit /b
 move ..\libogg* ..\libogg || exit /b
 msbuild /p:Configuration=Release /p:PlatformToolset=v140_xp win32\VS2010\vorbis_static.sln || exit /b
@@ -81,7 +81,7 @@ mkdir ..\build\include\vorbis
 copy /Y include\vorbis\*.h ..\build\include\vorbis\ || exit /b
 cd .. || exit /b
 
-REM http://downloads.xiph.org/releases/theora/libtheora-1.1.1.zip || exit /b
+REM https://downloads.xiph.org/releases/theora/libtheora-1.1.1.zip || exit /b
 cd libtheora* || exit /b
 move ..\libvorbis* ..\libvorbis || exit /b
 devenv win32\VS2008\libtheora_static.sln /upgrade || exit /b
@@ -124,7 +124,7 @@ copy /Y build\Release\storm.lib ..\build\lib\ || exit /b
 copy /Y src\*.h ..\build\include\ || exit /b
 cd .. || exit /b
 
-REM https://www.libsdl.org/release/SDL2-devel-2.0.12-VC.zip
+REM https://www.libsdl.org/release/SDL2-devel-2.0.16-VC.zip
 cd SDL2-2.0.12 || exit /b
 copy /Y lib\x86\*.dll ..\build\bin\ || exit /b
 copy /Y lib\x86\*.lib ..\build\lib\ || exit /b
