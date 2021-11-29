@@ -77,7 +77,6 @@ cd .. || exit /b
 
 REM https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.zip || exit /b
 cd libvorbis* || exit /b
-move ..\libogg* ..\libogg || exit /b
 msbuild /p:Configuration=Release /p:PlatformToolset=v143 /p:Platform=Win32 win32\VS2010\vorbis_static.sln || exit /b
 copy /Y win32\VS2010\Win32\Release\libvorbis_static.lib ..\build\lib\vorbis_static.lib || exit /b
 copy /Y win32\VS2010\Win32\Release\libvorbisfile_static.lib ..\build\lib\vorbisfile_static.lib || exit /b
@@ -87,7 +86,6 @@ cd .. || exit /b
 
 REM https://downloads.xiph.org/releases/theora/libtheora-1.1.1.zip || exit /b
 cd libtheora* || exit /b
-move ..\libvorbis* ..\libvorbis || exit /b
 devenv win32\VS2008\libtheora_static.sln /upgrade || exit /b
 msbuild /p:Configuration=Release_SSE2 /p:PlatformToolset=v143 /p:Platform=Win32 win32\VS2008\libtheora_static.sln /t:libtheora_static || exit /b
 copy /Y win32\VS2008\Win32\Release_SSE2\libtheora_static.lib ..\build\lib\theora_static.lib || exit /b
