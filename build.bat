@@ -5,8 +5,8 @@ mkdir build\bin
 mkdir build\include
 mkdir build\lib
 
-set CL=/D_USING_V120_SDK71_ || exit /b
-set _CL_=/D_USING_V120_SDK71_ || exit /b
+set CL=/D_USING_V143_SDK71_ || exit /b
+set _CL_=/D_USING_V143_SDK71_ || exit /b
 set LINK=/SUBSYSTEM:CONSOLE,"5.01" || exit /b
 set _LINK_=/SUBSYSTEM:CONSOLE,"5.01" || exit /b
 set INCLUDE=..\build\include;$(DXSDK_DIR)Include;%INCLUDE% || exit /b
@@ -14,17 +14,18 @@ set LIB=..\build\lib;$(DXSDK_DIR)Lib\x86;%LIB% || exit /b
 
 REM https://sourceware.org/pub/bzip2/bzip2-1.0.8.tar.gz || exit /b
 cd bzip2* || exit /b
-nmake /E -f makefile.msc || exit /b
+set ExternalCompilerOptions=/DWINVER=0x0601 /D_WIN32_WINNT=0x0601
+msbuild /t:libbz2-static /p:Configuration=Release /p:Platform=Win32  /p:PlatformToolset=v143 build-VS2022\bzip2.sln || exit /b
 copy /Y bzlib.h ..\build\include\bzlib.h || exit /b
 copy /Y bzlib_private.h ..\build\include\bzlib_private.h || exit /b
-copy /Y libbz2.lib ..\build\lib\bz2.lib || exit /b
+copy /Y .\build-VS2022\Release\libbz2-static.lib ..\build\lib\bz2.lib || exit /b
 cd .. || exit /b
 
 REM https://www.zlib.net/zlib-1.2.11.tar.gz || exit /b
 cd zlib* || exit /b
 mkdir build
 cd build || exit /b
-cmake -G "Visual Studio 14 2015" -T v140_xp .. || exit /b
+cmake -DCMAKE_SYSTEM_VERSION=8.1 -A Win32 .. || exit /b
 cmake --build . --config Release || exit /b
 cd .. || exit /b
 copy /Y build\Release\zlibstatic.lib ..\build\lib\zlib.lib || exit /b
@@ -32,21 +33,23 @@ copy /Y build\zconf.h ..\build\include\ || exit /b
 copy /Y zlib.h ..\build\include\ || exit /b
 cd .. || exit /b
 
-REM https://www.ijg.org/files/jpegsr9d.zip || exit /b
+REM https://www.ijg.org/files/jpegsr6b.zip || exit /b
 cd jpeg* || exit /b
 copy /Y jconfig.vc jconfig.h || exit /b
 nmake /E -f jpeg.mak || exit /b
 copy /Y Release\jpeg.lib ..\build\lib\ || exit /b
 powershell -Command "& { cat jmorecfg.h | %%{$_ -replace \"typedef long INT32;\", \"\"} | Set-Content -Path jmorecfg.h.patched }" || exit /b
+move /Y jmorecfg.h jmorecfg.h.old || exit /bat
 move /Y jmorecfg.h.patched jmorecfg.h || exit /b
 copy /Y *.h ..\build\include\ || exit /b
+move /Y jmorecfg.h.old jmorecfg.h || exit /b
 cd .. || exit /b
 
 REM http://prdownloads.sourceforge.net/libpng/lpng1637.zip?download || exit /b
-cd libpng* || exit /b
+cd lpng* || exit /b
 mkdir build
 cd build || exit /b
-cmake -G "Visual Studio 14 2015" -T v140_xp -DZLIB_LIBRARY=..\..\build\lib\zlib.lib -DZLIB_INCLUDE_DIR=..\..\build\include\ .. || exit /b
+cmake  -DCMAKE_SYSTEM_VERSION=8.1 -A Win32 -DZLIB_LIBRARY=..\..\build\lib\zlib.lib -DZLIB_INCLUDE_DIR=..\..\build\include\ .. || exit /b
 cmake --build . --config Release || exit /b
 cd .. || exit /b
 copy /Y build\Release\libpng16_static.lib ..\build\lib\libpng.lib || exit /b
@@ -65,8 +68,9 @@ cd .. || exit /b
 
 REM https://downloads.xiph.org/releases/ogg/libogg-1.3.5.zip || exit /b
 cd libogg* || exit /b
-msbuild /p:Configuration=Release /p:PlatformToolset=v140_xp win32\VS2010\libogg_static.sln || exit /b
-copy /Y win32\VS2010\Win32\Release\libogg_static.lib ..\build\lib\ogg_static.lib || exit /b
+set ExternalCompilerOptions=/DWINVER=0x0601 /D_WIN32_WINNT=0x0601
+msbuild /p:Configuration=Release /p:PlatformToolset=v143 /p:Platform=Win32 win32\VS2015\libogg.sln || exit /b
+copy /Y win32\VS2015\Win32\Release\libogg.lib ..\build\lib\ogg.lib || exit /b
 mkdir ..\build\include\ogg
 copy /Y include\ogg\*.h ..\build\include\ogg\ || exit /b
 cd .. || exit /b
@@ -74,7 +78,7 @@ cd .. || exit /b
 REM https://downloads.xiph.org/releases/vorbis/libvorbis-1.3.7.zip || exit /b
 cd libvorbis* || exit /b
 move ..\libogg* ..\libogg || exit /b
-msbuild /p:Configuration=Release /p:PlatformToolset=v140_xp win32\VS2010\vorbis_static.sln || exit /b
+msbuild /p:Configuration=Release /p:PlatformToolset=v143 /p:Platform=Win32 win32\VS2010\vorbis_static.sln || exit /b
 copy /Y win32\VS2010\Win32\Release\libvorbis_static.lib ..\build\lib\vorbis_static.lib || exit /b
 copy /Y win32\VS2010\Win32\Release\libvorbisfile_static.lib ..\build\lib\vorbisfile_static.lib || exit /b
 mkdir ..\build\include\vorbis
@@ -85,7 +89,7 @@ REM https://downloads.xiph.org/releases/theora/libtheora-1.1.1.zip || exit /b
 cd libtheora* || exit /b
 move ..\libvorbis* ..\libvorbis || exit /b
 devenv win32\VS2008\libtheora_static.sln /upgrade || exit /b
-msbuild /p:Configuration=Release_SSE2 /p:PlatformToolset=v140_xp win32\VS2008\libtheora_static.sln /t:libtheora_static || exit /b
+msbuild /p:Configuration=Release_SSE2 /p:PlatformToolset=v143 /p:Platform=Win32 win32\VS2008\libtheora_static.sln /t:libtheora_static || exit /b
 copy /Y win32\VS2008\Win32\Release_SSE2\libtheora_static.lib ..\build\lib\theora_static.lib || exit /b
 mkdir ..\build\include\theora
 copy /Y include\theora\*.h ..\build\include\theora\ || exit /b
@@ -105,7 +109,7 @@ mkdir build
 powershell -Command "& { cat CMakeLists.txt | %%{$_ -replace [Regex]::Escape(\"add_library ( toluapp_lib \"), \"add_library ( toluapp_lib STATIC \"} | Set-Content -Path CMakeLists.txt.patched }" || exit /b
 move /Y CMakeLists.txt.patched CMakeLists.txt || exit /b
 cd build || exit /b
-cmake -G "Visual Studio 14 2015" -T v140_xp -DCMAKE_PREFIX_PATH=..\build .. || exit /b
+cmake  -DCMAKE_SYSTEM_VERSION=8.1 -A Win32 -DCMAKE_PREFIX_PATH=..\build .. || exit /b
 cmake --build . --config Release || exit /b
 cd .. || exit /b
 copy /Y build\Release\toluapp.exe ..\build\bin\ || exit /b
@@ -117,7 +121,7 @@ REM https://github.com/ladislav-zezula/StormLib/archive/master.zip || exit /b
 cd StormLib* || exit /b
 mkdir build
 cd build || exit /b
-cmake -G "Visual Studio 14 2015" -T v140_xp -DCMAKE_PREFIX_PATH=..\build -DWITH_STATIC=ON .. || exit /b
+cmake -G "Visual Studio 16 2019" -DCMAKE_SYSTEM_VERSION=8.1 -A Win32 -DCMAKE_PREFIX_PATH=..\build -DWITH_STATIC=ON .. || exit /b
 cmake --build . --config Release || exit /b
 cd .. || exit /b
 copy /Y build\Release\storm.lib ..\build\lib\ || exit /b
