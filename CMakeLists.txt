@@ -32,6 +32,15 @@ ExternalProject_Add(
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
   DEPENDS zlib)
+  
+  ExternalProject_Add(mng
+  PREFIX mng
+  DOWNLOAD_DIR "${CMAKE_BINARY_DIR}/mng"
+  URL http://prdownloads.sourceforge.net/libmng/lm010010.zip?download
+  BUILD_IN_SOURCE 1
+  DEPENDS zlib
+  )
+  
 
 ExternalProject_Add(
   jpeg
@@ -88,6 +97,7 @@ ExternalProject_Add(
           zlib
           png
           bzip2)
+		  
 ExternalProject_Add(
   toluapp
   PREFIX toluapp
