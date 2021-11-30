@@ -22,7 +22,7 @@ ExternalProject_Add(
   SHA256=c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib)
-
+			 
 ExternalProject_Add(
   png
   PREFIX png
@@ -33,15 +33,6 @@ ExternalProject_Add(
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
   DEPENDS zlib)
   
-  ExternalProject_Add(mng
-  PREFIX mng
-  DOWNLOAD_DIR "${CMAKE_BINARY_DIR}/mng"
-  URL http://prdownloads.sourceforge.net/libmng/lm010010.zip?download
-  BUILD_IN_SOURCE 1
-  DEPENDS zlib
-  )
-  
-
 ExternalProject_Add(
   jpeg
   PREFIX jpeg
@@ -51,6 +42,19 @@ ExternalProject_Add(
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
   DEPENDS zlib png)
+
+
+  
+  ExternalProject_Add(mng
+  PREFIX mng
+  DOWNLOAD_DIR "${CMAKE_BINARY_DIR}/mng"
+  URL https://downloads.sourceforge.net/libmng/libmng-2.0.3.tar.xz
+  BUILD_IN_SOURCE 1
+  CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
+             -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
+             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
+  DEPENDS zlib jpeg
+  )
 
 ExternalProject_Add(
   ogg
