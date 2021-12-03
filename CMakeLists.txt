@@ -10,7 +10,13 @@ ExternalProject_Add(
   PREFIX bzip2
   GIT_REPOSITORY https://gitlab.com/bzip2/bzip2.git
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
-             -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib)
+             -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
+			 -DENABLE_STATIC_LIB=ON
+			 -DENABLE_SHARED_LIB=OFF
+			 -DENABLE_APP=OFF
+			 -DENABLE_DOCS=OFF
+			 -DENABLE_EXAMPLES=OFF
+			 )
 
 ExternalProject_Add(
   zlib
@@ -21,7 +27,8 @@ ExternalProject_Add(
   URL-HASH
   SHA256=c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
-             -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib)
+             -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
+			 -DSKIP_INSTALL_FILES=ON)
 			 
 ExternalProject_Add(
   png
@@ -31,6 +38,8 @@ ExternalProject_Add(
   BUILD_IN_SOURCE 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
+			 -DSKIP_INSTALL_FILES=ON
+			 -DPNG_STATIC=ON
   DEPENDS zlib)
   
 ExternalProject_Add(
@@ -63,7 +72,13 @@ ExternalProject_Add(
   GIT_TAG v1.3.5
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
-             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib)
+             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
+			 -DINSTALL_DOCS=OFF
+			 -DINSTALL_PKG_CONFIG_MODULE=OFF
+			 -DINSTALL_CMAKE_PACKAGE_MODULE=OFF
+			 )
+			 
+			 
 
 ExternalProject_Add(
   vorbis
@@ -72,7 +87,8 @@ ExternalProject_Add(
   GIT_TAG v1.3.7
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
-             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib)
+             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
+			 -DINSTALL_CMAKE_PACKAGE_MODULE=OFF)
 
 ExternalProject_Add(
   theora
