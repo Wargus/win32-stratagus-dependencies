@@ -1,9 +1,11 @@
-os: Visual Studio 2015
+os: Visual Studio 2019
 shallow_clone: true
 install:
 build_script:
-  - '"C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\vcvarsall.bat" x86'
-  - build.bat
+  - 'mkdir build'
+  - 'cd build'
+  - 'cmake -DCMAKE_SYSTEM_VERSION=8.1 -A Win32  ..\win32-stratagus-dependencies\'
+  - 'MSBuild.exe /p:Configuration=Release /p:PlatformToolset=v143 /p:Platform=Win32  .\win32_stratagus_dependencies.sln'
   - move build dependencies
   - 7z a dependencies.zip dependencies\
 artifacts:
