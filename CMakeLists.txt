@@ -85,14 +85,7 @@ ExternalProject_Add(
   DEPENDS ogg vorbis
   )
 
-ExternalProject_Add(
-  lua
-  PREFIX lua
-  SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/lua-5.1.5/
-	CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
-             -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
-             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
-  )
+
 
 ExternalProject_Add(
   stormlib
@@ -110,3 +103,11 @@ ExternalProject_Add(
           bzip2)
 		  
 
+ExternalProject_Add(
+  lua
+  PREFIX lua
+  SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/lua-5.1.5/
+	CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
+             -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
+             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
+  )

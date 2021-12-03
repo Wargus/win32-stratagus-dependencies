@@ -3,9 +3,6 @@ cmake_minimum_required(VERSION 3.1)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
 
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
-
 set(LUA_LIB_SRC
  "lapi.c"
  "lcode.c"
@@ -42,6 +39,7 @@ set(LUA_SRC "lua.c")
 
 add_library(lua51_static STATIC "${LUA_LIB_SRC}")
 set_target_properties(lua51_static PROPERTIES OUTPUT_NAME "lua51")
+set_target_properties(lua51_static PROPERTIES PUBLIC_HEADER "lua.h;lualib.h;lauxlib.h;luaconf.h")
 
 add_executable(lua51 "${LUA_SRC}" "${LUA_LIB_SRC}")
 
@@ -59,14 +57,14 @@ target_link_libraries(lua51 PUBLIC ${CMAKE_DL_LIBS})
 target_link_libraries(lua51_static PUBLIC ${CMAKE_DL_LIBS})
 endif()
 
+target_include_directories(lua51_static PUBLIC ./)
+
 set_target_properties(lua51_static PROPERTIES LINKER_LANGUAGE CXX)
 set_target_properties(lua51 PROPERTIES LINKER_LANGUAGE CXX)
 
-set_target_properties(lua51 PROPERTIES
-        RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR}
-    )
-
 
 install(TARGETS lua51 DESTINATION ${CMAKE_INSTALL_BINDIR})
-install(FILES lua.h lualib.h lauxlib.h luaconf.h TYPE INCLUDE DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
-install(TARGETS lua51_static DESTINATION ${CMAKE_INSTALL_LIBDIR})
+install(TARGETS lua51_static 
+LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
+PUBLIC_HEADER DESTINATION  ${CMAKE_INSTALL_INCLUDEDIR}
+)
