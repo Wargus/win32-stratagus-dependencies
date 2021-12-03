@@ -6,7 +6,7 @@ build_script:
   - 'cd build'
   - 'cmake -DCMAKE_SYSTEM_VERSION=8.1 -A Win32  ..'
   - 'MSBuild.exe /p:Configuration=Release /p:PlatformToolset=v142 /p:Platform=Win32  .\win32_stratagus_dependencies.sln'
-  - move build dependencies
+  - move contrib dependencies
   - 7z a dependencies.zip dependencies\
 artifacts:
   - path: dependencies.zip
