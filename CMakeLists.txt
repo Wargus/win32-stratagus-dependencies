@@ -75,7 +75,6 @@ ExternalProject_Add(
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
 			 -DINSTALL_DOCS=OFF
 			 -DINSTALL_PKG_CONFIG_MODULE=OFF
-			 -DINSTALL_CMAKE_PACKAGE_MODULE=OFF
 			 )
 			 
 			 
@@ -88,7 +87,7 @@ ExternalProject_Add(
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
-			 -DINSTALL_CMAKE_PACKAGE_MODULE=OFF)
+	)
 
 ExternalProject_Add(
   theora
