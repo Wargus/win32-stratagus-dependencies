@@ -68,5 +68,5 @@ set_target_properties(lua51 PROPERTIES
 
 
 install(TARGETS lua51 DESTINATION ${CMAKE_INSTALL_BINDIR})
-install(FILES lua.h lualib.h lauxlib.h luaconf.h DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
+install(FILES lua.h lualib.h lauxlib.h luaconf.h TYPE INCLUDE DESTINATION ${CMAKE_INSTALL_INCLUDEDIR})
 install(TARGETS lua51_static DESTINATION ${CMAKE_INSTALL_LIBDIR})
