@@ -19,19 +19,21 @@ tolua_to.c
 
 include_directories("${CMAKE_CURRENT_LIST_DIR}/../src/")
 
-add_library(toluapp51 STATIC "${TOLUA_LIB_SRC}")
-add_executable(toluapp "${TOLUA_BIN_SRC}" "${TOLUA_LIB_SRC}")
+add_library(tolua++5.1-lib STATIC "${TOLUA_LIB_SRC}")
+add_executable(tolua++5.1 "${TOLUA_BIN_SRC}" "${TOLUA_LIB_SRC}")
 
-target_link_libraries(toluapp51 PUBLIC lua51_static ${CMAKE_DL_LIBS})
-target_link_libraries(toluapp PUBLIC lua51_static ${CMAKE_DL_LIBS})
+set_target_properties(tolua++5.1-lib PROPERTIES OUTPUT_NAME "tolua++5.1")
 
-set_target_properties(toluapp51 PROPERTIES PUBLIC_HEADER "tolua++.h")
+target_link_libraries(tolua++5.1-lib PUBLIC lua51_static ${CMAKE_DL_LIBS})
+target_link_libraries(tolua++5.1 PUBLIC lua51_static ${CMAKE_DL_LIBS})
 
-set_target_properties(toluapp51 PROPERTIES LINKER_LANGUAGE CXX)
-set_target_properties(toluapp PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(tolua++5.1-lib PROPERTIES PUBLIC_HEADER "tolua++.h")
 
-install(TARGETS toluapp DESTINATION ${CMAKE_INSTALL_BINDIR})
-install(TARGETS toluapp51 
+set_target_properties(tolua++5.1-lib PROPERTIES LINKER_LANGUAGE CXX)
+set_target_properties(tolua++5.1 PROPERTIES LINKER_LANGUAGE CXX)
+
+install(TARGETS tolua++5.1 DESTINATION ${CMAKE_INSTALL_BINDIR})
+install(TARGETS tolua++5.1-lib 
 LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
 PUBLIC_HEADER DESTINATION  ${CMAKE_INSTALL_INCLUDEDIR}
 )
