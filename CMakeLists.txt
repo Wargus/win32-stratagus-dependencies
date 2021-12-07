@@ -13,12 +13,11 @@ ExternalProject_Add(
   GIT_SHALLOW 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
-			 -DENABLE_STATIC_LIB=ON
-			 -DENABLE_SHARED_LIB=OFF
-			 -DENABLE_APP=OFF
-			 -DENABLE_DOCS=OFF
-			 -DENABLE_EXAMPLES=OFF
-			 )
+             -DENABLE_STATIC_LIB=ON
+             -DENABLE_SHARED_LIB=OFF
+             -DENABLE_APP=OFF
+             -DENABLE_DOCS=OFF
+             -DENABLE_EXAMPLES=OFF)
 
 ExternalProject_Add(
   zlib
@@ -30,8 +29,8 @@ ExternalProject_Add(
   SHA256=c3e5e9fdd5004dcb542feda5ee4f0ff0744628baf8ed2dd5d66f8ca1197cb1a1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
-			 -DSKIP_INSTALL_FILES=ON)
-			 
+             -DSKIP_INSTALL_FILES=ON)
+
 ExternalProject_Add(
   png
   PREFIX png
@@ -40,10 +39,9 @@ ExternalProject_Add(
   BUILD_IN_SOURCE 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
-			 -DSKIP_INSTALL_FILES=ON
-			 -DPNG_STATIC=ON
+             -DSKIP_INSTALL_FILES=ON -DPNG_STATIC=ON
   DEPENDS zlib)
-  
+
 ExternalProject_Add(
   jpeg
   PREFIX jpeg
@@ -55,9 +53,8 @@ ExternalProject_Add(
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
   DEPENDS zlib png)
 
-
-  
-  ExternalProject_Add(mng
+ExternalProject_Add(
+  mng
   PREFIX mng
   DOWNLOAD_DIR "${CMAKE_BINARY_DIR}/mng"
   URL https://downloads.sourceforge.net/libmng/libmng-2.0.3.tar.xz
@@ -65,8 +62,7 @@ ExternalProject_Add(
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
-  DEPENDS zlib jpeg
-  )
+  DEPENDS zlib jpeg)
 
 ExternalProject_Add(
   ogg
@@ -77,11 +73,8 @@ ExternalProject_Add(
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
-			 -DINSTALL_DOCS=OFF
-			 -DINSTALL_PKG_CONFIG_MODULE=OFF
-			 )
-			 
-			 
+             -DINSTALL_DOCS=OFF
+             -DINSTALL_PKG_CONFIG_MODULE=OFF)
 
 ExternalProject_Add(
   vorbis
@@ -91,8 +84,7 @@ ExternalProject_Add(
   GIT_SHALLOW 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
-             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
-	)
+             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib)
 
 ExternalProject_Add(
   theora
@@ -103,10 +95,7 @@ ExternalProject_Add(
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
-  DEPENDS ogg vorbis
-  )
-
-
+  DEPENDS ogg vorbis)
 
 ExternalProject_Add(
   stormlib
@@ -116,7 +105,7 @@ ExternalProject_Add(
   GIT_SHALLOW 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
-             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib 
+             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
   DEPENDS theora
           vorbis
           ogg
@@ -124,45 +113,42 @@ ExternalProject_Add(
           zlib
           png
           bzip2)
-		  
 
 ExternalProject_Add(
   lua
   PREFIX lua
   SOURCE_DIR ${CMAKE_CURRENT_LIST_DIR}/lua-5.1.5/
-	CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
+  CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
+             -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
+             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib)
+
+ExternalProject_Add(
+  sdl2
+  PREFIX sdl2
+  GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
+  GIT_TAG release-2.0.18
+  GIT_SHALLOW 1
+  CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
+             -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib)
+
+ExternalProject_Add(
+  sdl2_mixer
+  PREFIX sdl2_mixer
+  GIT_REPOSITORY https://github.com/libsdl-org/SDL_mixer.git
+  GIT_TAG cfc9f77077a323df0f348651bf46712f35e4c4f4
+  GIT_SHALLOW 1
+  CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
-  )
-  
+  DEPENDS sdl2 zlib theora vorbis ogg)
+
 ExternalProject_Add(
-    sdl2
-    PREFIX sdl2
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
-    GIT_TAG release-2.0.18
-	GIT_SHALLOW 1
-    CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
-               -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
-         )
-  
-ExternalProject_Add(
-    sdl2_mixer
-    PREFIX sdl2_mixer
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL_mixer.git
-    GIT_TAG cfc9f77077a323df0f348651bf46712f35e4c4f4
-	GIT_SHALLOW 1
-    CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
-                -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
-                -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
-    DEPENDS sdl2 zlib theora vorbis ogg)
-  
-ExternalProject_Add(
-    sdl2_image
-    PREFIX sdl2_image
-    GIT_REPOSITORY https://github.com/libsdl-org/SDL_image.git
-    GIT_TAG 63efffb9f2d66f760a4c4b06d9d28077ebebebb8
-	GIT_SHALLOW 1
-    CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
-                -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
-                -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
-    DEPENDS sdl2 zlib png jpeg mng)
+  sdl2_image
+  PREFIX sdl2_image
+  GIT_REPOSITORY https://github.com/libsdl-org/SDL_image.git
+  GIT_TAG 63efffb9f2d66f760a4c4b06d9d28077ebebebb8
+  GIT_SHALLOW 1
+  CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
+             -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
+             -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
+  DEPENDS sdl2 zlib png jpeg mng)
