@@ -10,7 +10,6 @@ ExternalProject_Add(
   PREFIX bzip2
   GIT_REPOSITORY https://gitlab.com/bzip2/bzip2.git
   GIT_TAG 2221ed3debadd1b2607207b68f0dbb423b8f9a5b
-  GIT_SHALLOW 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DENABLE_STATIC_LIB=ON
@@ -47,7 +46,6 @@ ExternalProject_Add(
   PREFIX jpeg
   GIT_REPOSITORY https://github.com/mozilla/mozjpeg.git
   GIT_TAG v4.0.3
-  GIT_SHALLOW 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
@@ -69,7 +67,6 @@ ExternalProject_Add(
   PREFIX ogg
   GIT_REPOSITORY https://github.com/xiph/ogg.git
   GIT_TAG v1.3.5
-  GIT_SHALLOW 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
@@ -81,7 +78,6 @@ ExternalProject_Add(
   PREFIX vorbis
   GIT_REPOSITORY https://github.com/xiph/vorbis.git
   GIT_TAG v1.3.7
-  GIT_SHALLOW 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib)
@@ -91,7 +87,6 @@ ExternalProject_Add(
   PREFIX theora
   GIT_REPOSITORY https://github.com/abenedic/theora.git
   GIT_TAG 45a16782f7e7da46153342ddf625ba380919eff1
-  GIT_SHALLOW 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
@@ -102,7 +97,6 @@ ExternalProject_Add(
   PREFIX stormlib
   GIT_REPOSITORY https://github.com/ladislav-zezula/StormLib.git
   GIT_TAG 5ab093b7a57b8779dff06a08fac19d46c40b3329
-  GIT_SHALLOW 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
@@ -127,7 +121,6 @@ ExternalProject_Add(
   PREFIX sdl2
   GIT_REPOSITORY https://github.com/libsdl-org/SDL.git
   GIT_TAG release-2.0.18
-  GIT_SHALLOW 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib)
 
@@ -136,7 +129,6 @@ ExternalProject_Add(
   PREFIX sdl2_mixer
   GIT_REPOSITORY https://github.com/libsdl-org/SDL_mixer.git
   GIT_TAG cfc9f77077a323df0f348651bf46712f35e4c4f4
-  GIT_SHALLOW 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
@@ -147,7 +139,6 @@ ExternalProject_Add(
   PREFIX sdl2_image
   GIT_REPOSITORY https://github.com/libsdl-org/SDL_image.git
   GIT_TAG 63efffb9f2d66f760a4c4b06d9d28077ebebebb8
-  GIT_SHALLOW 1
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
