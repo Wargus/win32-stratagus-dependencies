@@ -127,8 +127,7 @@ ExternalProject_Add(
 ExternalProject_Add(
   sdl2_mixer
   PREFIX sdl2_mixer
-  GIT_REPOSITORY https://github.com/libsdl-org/SDL_mixer.git
-  GIT_TAG cfc9f77077a323df0f348651bf46712f35e4c4f4
+  GIT_REPOSITORY https://github.com/abenedic/SDL_mixer.git
   CMAKE_ARGS -DCMAKE_SYSTEM_VERSION=8.1
              -DCMAKE_INSTALL_PREFIX=${CMAKE_BINARY_DIR}/contrib
              -DCMAKE_PREFIX_PATH=${CMAKE_BINARY_DIR}/contrib
